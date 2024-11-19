@@ -1,5 +1,5 @@
 plugins {
-    id("kotlin")
+    id("pl.fewbits.radioexample.java")
 }
 
 dependencies {

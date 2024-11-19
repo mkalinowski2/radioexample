@@ -22,9 +22,15 @@ dependencyResolutionManagement {
 rootProject.name = "RadioExample"
 include(
     ":app",
+    ":android-ui",
     ":core-home",
+    ":feature-home",
+    ":feature-radiodetails",
     ":lib-network"
 )
 
+project(":android-ui").projectDir = file("android-modules/android-ui")
 project(":core-home").projectDir = file("core-modules/core-home")
+project(":feature-home").projectDir = file("feature-modules/feature-home")
+project(":feature-radiodetails").projectDir = file("feature-modules/feature-radiodetails")
 project(":lib-network").projectDir = file("lib-modules/lib-network")

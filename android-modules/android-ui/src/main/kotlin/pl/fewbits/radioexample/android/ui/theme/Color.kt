@@ -1,4 +1,4 @@
-package pl.fewbits.radioexample.ui.theme
+package pl.fewbits.radioexample.android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
