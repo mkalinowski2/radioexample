@@ -20,5 +20,11 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "RadioExample"
-include(":app")
- 
+include(
+    ":app",
+    ":core-home",
+    ":lib-network"
+)
+
+project(":core-home").projectDir = file("core-modules/core-home")
+project(":lib-network").projectDir = file("lib-modules/lib-network")
