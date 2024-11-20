@@ -30,7 +30,7 @@ class RadioPlayer(private val context: Context) {
         ).buildAsync()
     }
 
-    init {
+    fun init() {
         controllerFuture.addListener(
             {
                 mediaController = controllerFuture.get().apply {

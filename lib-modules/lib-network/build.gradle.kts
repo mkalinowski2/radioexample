@@ -10,7 +10,7 @@ dependencies {
     implementation(libs.json.moshi.retrofit)
     implementation(libs.okhttp.logging)
 
-    testImplementation(libs.koin.test)
+    testImplementation(libs.test.koin)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.kotest)
     testImplementation(libs.test.mockk)

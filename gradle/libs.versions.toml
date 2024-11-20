@@ -19,7 +19,7 @@ retrofit = "2.9.0"
 navigation = "2.8.4"
 coil = "2.5.0"
 serializable = "1.5.1"
-playServicesCastFramework = "22.0.0"
+mediaplayer = "1.2.0"
 
 [libraries]
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
@@ -39,23 +39,21 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 json-moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
-json-moshi-adapters = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
 json-moshi-retrofit = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshiRetrofit" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
-koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }
 navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 serializable = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializable" }
+media-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "mediaplayer" }
+media-session = { group = "androidx.media3", name = "media3-session", version.ref = "mediaplayer" }
 
 test-junit = { group = "junit", name = "junit", version.ref = "junit" }
 test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 test-kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+test-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+test-koin = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }
 test-mock-webserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
-play-services-cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "playServicesCastFramework" }
 
-[plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

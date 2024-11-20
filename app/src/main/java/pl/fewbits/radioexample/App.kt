@@ -12,6 +12,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         KoinInitializer.init(this)
+        radioPlayer.init()
     }
 
     override fun onTerminate() {

@@ -12,5 +12,5 @@ dependencies {
     testImplementation(libs.test.mockk)
     testImplementation(libs.test.kotest)
     testImplementation(libs.test.mock.webserver)
-    testImplementation(libs.koin.test)
+    testImplementation(libs.test.koin)
 }
