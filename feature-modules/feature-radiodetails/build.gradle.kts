@@ -11,4 +11,5 @@ dependencies {
     implementation(project(":android-ui"))
     implementation(project(":android-app-navigator"))
     implementation(project(":core-home"))
+    implementation(project(":component-radioplayer"))
 }

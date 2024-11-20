@@ -9,22 +9,17 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import kotlinx.serialization.Serializable
+import pl.fewbits.radioexample.android.appnavigator.ScreenArgs
 import pl.fewbits.radioexample.android.ui.theme.RadioExampleTheme
 import pl.fewbits.radioexample.navigation.AppGraphFactory
 import pl.fewbits.radioexample.navigation.AppNavigatorImpl
-import pl.fewbits.radioexample.android.appnavigator.ScreenArgs
 import pl.fewbits.radioexample.navigation.TRANSITION_ANIM_DURATION_MS
 
-@Serializable
-data class User(
-    val id: Int,
-    val name: String
-)
-
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()

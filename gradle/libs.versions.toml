@@ -19,6 +19,7 @@ retrofit = "2.9.0"
 navigation = "2.8.4"
 coil = "2.5.0"
 serializable = "1.5.1"
+playServicesCastFramework = "22.0.0"
 
 [libraries]
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
@@ -52,6 +53,7 @@ test-junit = { group = "junit", name = "junit", version.ref = "junit" }
 test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 test-kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
 test-mock-webserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
+play-services-cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "playServicesCastFramework" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

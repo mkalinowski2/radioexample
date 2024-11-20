@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,6 +47,7 @@ import coil.compose.AsyncImage
 import org.koin.androidx.compose.koinViewModel
 import pl.fewbits.radioexample.android.appnavigator.AppNavigator
 import pl.fewbits.radioexample.android.appnavigator.MockAppNavigator
+import pl.fewbits.radioexample.android.ui.R
 import pl.fewbits.radioexample.android.ui.Screen
 import pl.fewbits.radioexample.android.ui.components.BottomBar
 import pl.fewbits.radioexample.android.ui.components.CircleLoader
@@ -72,7 +74,7 @@ fun HomeScreenView(viewModel: HomeViewModel, appNavigator: AppNavigator) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBar(title = "RadioShowcase", null) },
+        topBar = { TopBar(title = stringResource(R.string.screen_home_title), null) },
         bottomBar = { BottomBar() }
     ) { innerPadding ->
         Box(
@@ -89,6 +91,7 @@ fun HomeScreenView(viewModel: HomeViewModel, appNavigator: AppNavigator) {
     }
 }
 
+@ExperimentalLayoutApi
 @Composable
 fun HomeScreenViewContent(state: HomeState.Content, appNavigator: AppNavigator) {
     LazyColumn {
@@ -154,8 +157,8 @@ fun RadioStationItem(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        painter = painterResource(id = pl.fewbits.radioexample.android.ui.R.drawable.ic_signal_12),
-                        contentDescription = "Reliability",
+                        painter = painterResource(id = R.drawable.ic_signal_12),
+                        contentDescription = stringResource(R.string.reliability),
                         tint = station.reliability.getColorReliability()
                     )
 
@@ -207,7 +210,7 @@ fun ErrorContent(
     ) {
         Icon(
             imageVector = Icons.Filled.Warning,
-            contentDescription = "Error",
+            contentDescription = stringResource(R.string.error),
             modifier = Modifier.size(100.dp),
             tint = MaterialTheme.colorScheme.error
         )
@@ -215,7 +218,7 @@ fun ErrorContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Oops!",
+            text = stringResource(id = R.string.error_generic_oops),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.error
         )
@@ -223,7 +226,7 @@ fun ErrorContent(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Something went wrong",
+            text = stringResource(R.string.error_generic_unknown),
             style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -241,7 +244,7 @@ fun ErrorContent(
             )
         ) {
             Text(
-                text = "Try Again",
+                text = stringResource(R.string.try_again),
                 style = MaterialTheme.typography.titleMedium
             )
         }

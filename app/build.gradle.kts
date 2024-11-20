@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":android-app-navigator"))
     implementation(project(":feature-home"))
     implementation(project(":feature-radiodetails"))
+    implementation(project(":component-radioplayer"))
     implementation(project(":core-home"))
     implementation(project(":lib-network"))
     implementation(libs.koin.core)

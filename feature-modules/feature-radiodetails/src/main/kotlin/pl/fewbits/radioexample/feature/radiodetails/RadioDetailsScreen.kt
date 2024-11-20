@@ -2,6 +2,7 @@
 
 package pl.fewbits.radioexample.feature.radiodetails
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,41 +19,65 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import pl.fewbits.radioexample.android.appnavigator.AppNavigator
+import pl.fewbits.radioexample.android.ui.R
 import pl.fewbits.radioexample.android.ui.Screen
 import pl.fewbits.radioexample.android.ui.components.TopBar
 import pl.fewbits.radioexample.android.ui.theme.RadioExampleTheme
 import pl.fewbits.radioexample.core.home.domain.RadioStation
+import pl.fewbits.radioexample.feature.radiodetails.state.RadioDetailsState
 
 object RadioDetailsScreen : Screen {
 
     @Composable
     fun Content(radioStation: RadioStation, appNavigator: AppNavigator) {
-        RadioDetailsScreenView(radioStation, appNavigator)
+        val viewModel = koinViewModel<RadioDetailsViewModel> { parametersOf(radioStation) }
+        RadioDetailsScreenView(radioStation, viewModel, appNavigator)
     }
 }
 
 @Composable
-fun RadioDetailsScreenView(radioStation: RadioStation, appNavigator: AppNavigator) {
+fun RadioDetailsScreenView(
+    radioStation: RadioStation,
+    viewModel: RadioDetailsViewModel,
+    appNavigator: AppNavigator
+) {
+    val errorState = viewModel.getPlayerErrorStateFlow().collectAsState()
+    val context = LocalContext.current
+    val playerErrorMessage = stringResource(R.string.error_player_unknown_message)
+    LaunchedEffect(key1 = errorState.value) {
+        if (errorState.value != null) {
+            Toast.makeText(context, playerErrorMessage, Toast.LENGTH_SHORT).show()
+            viewModel.consumeLastError()
+        }
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -64,7 +89,10 @@ fun RadioDetailsScreenView(radioStation: RadioStation, appNavigator: AppNavigato
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            RadioDetailsScreenContent(radioStation, {})
+            RadioDetailsScreenContent(
+                radioStation,
+                viewModel
+            )
         }
     }
 }
@@ -72,7 +100,7 @@ fun RadioDetailsScreenView(radioStation: RadioStation, appNavigator: AppNavigato
 @Composable
 fun RadioDetailsScreenContent(
     radioStation: RadioStation,
-    onPlayClick: () -> Unit,
+    viewModel: RadioDetailsViewModel,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -113,7 +141,7 @@ fun RadioDetailsScreenContent(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Star,
-                        contentDescription = "Reliability",
+                        contentDescription = stringResource(id = R.string.reliability),
                         tint = MaterialTheme.colorScheme.primary
                     )
                     Text(
@@ -129,7 +157,7 @@ fun RadioDetailsScreenContent(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Person,
-                            contentDescription = "Popularity",
+                            contentDescription = stringResource(R.string.popularity),
                             tint = MaterialTheme.colorScheme.secondary
                         )
                         Text(
@@ -178,29 +206,57 @@ fun RadioDetailsScreenContent(
         // Play button
         Spacer(modifier = Modifier.weight(1f))
 
+        val state = viewModel.getStateFlow().collectAsState().value
         Button(
-            onClick = onPlayClick,
+            onClick = {
+                if (!state.isRadioPlaying) {
+                    viewModel.play()
+                } else {
+                    viewModel.stop()
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            )
+                containerColor = MaterialTheme.colorScheme.primary,
+                disabledContainerColor = MaterialTheme.colorScheme.primary,
+                disabledContentColor = MaterialTheme.colorScheme.onPrimary
+            ),
+            enabled = !state.isRadioBuffering
         ) {
-            Icon(
-                imageVector = Icons.Filled.PlayArrow,
-                contentDescription = "Play",
-                modifier = Modifier.size(24.dp)
-            )
+            if (state.isRadioBuffering) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(24.dp),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    strokeWidth = 2.dp
+                )
+            } else {
+                Icon(
+                    painter = painterResource(
+                        id = if (!state.isRadioPlaying) R.drawable.ic_play else R.drawable.ic_stop
+                    ),
+                    contentDescription = stringResource(if (!state.isRadioPlaying) R.string.play else R.string.stop),
+                    modifier = Modifier.size(24.dp)
+                )
+            }
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = "Play Station",
+                text = getButtonTest(state),
                 style = MaterialTheme.typography.titleMedium
             )
         }
     }
 }
 
+@Composable
+private fun getButtonTest(state: RadioDetailsState) = when {
+    state.isRadioBuffering -> R.string.loading_station
+    state.isRadioPlaying -> R.string.stop_station
+    else -> R.string.play_station
+}.let { stringResource(it) }
+
+@Preview(showBackground = true)
 @Composable
 fun Preview() {
     val sampleStation = RadioStation(
@@ -217,7 +273,7 @@ fun Preview() {
     RadioExampleTheme {
         RadioDetailsScreenContent(
             radioStation = sampleStation,
-            onPlayClick = {}
+            viewModel = MockRadioDetailsViewModel()
         )
     }
 }

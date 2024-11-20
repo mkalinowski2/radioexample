@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_content_title">Playback cannot be resumed</string>
+    <string name="notification_content_text">Press on the play button on the media notification if it
+    is still present, otherwise please open the app to start the playback and re-connect the session
+    to the controller</string>
+    <string name="notification_channel_name">Playback cannot be resumed</string>
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+    <string name="play_station">Play station</string>
+    <string name="stop_station">Stop station</string>
+    <string name="loading_station">Loading station</string>
+    <string name="popularity">Popularity</string>
+    <string name="reliability">Reliability</string>
+    <string name="screen_radio_details_title">Radio</string>
+    <string name="screen_home_title">Radio Showcase</string>
+    <string name="error_player_unknown_message">Ooops, player error!</string>
+    <string name="error_generic_unknown">Something went wrong!</string>
+    <string name="error">Error</string>
+    <string name="try_again">Try Again</string>
+    <string name="error_generic_oops">Ooops!</string>
+
+</resources>
