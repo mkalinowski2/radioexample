@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("pl.fewbits.radioexample.android")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -35,7 +36,15 @@ android {
 
 dependencies {
     implementation(project(":android-ui"))
+    implementation(project(":android-app-navigator"))
     implementation(project(":feature-home"))
+    implementation(project(":feature-radiodetails"))
+    implementation(project(":core-home"))
+    implementation(project(":lib-network"))
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.navigation)
+    implementation(libs.serializable)
 
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.androidx.junit)

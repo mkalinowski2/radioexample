@@ -23,6 +23,7 @@ rootProject.name = "RadioExample"
 include(
     ":app",
     ":android-ui",
+    ":android-app-navigator",
     ":core-home",
     ":feature-home",
     ":feature-radiodetails",
@@ -30,6 +31,7 @@ include(
 )
 
 project(":android-ui").projectDir = file("android-modules/android-ui")
+project(":android-app-navigator").projectDir = file("android-modules/android-app-navigator")
 project(":core-home").projectDir = file("core-modules/core-home")
 project(":feature-home").projectDir = file("feature-modules/feature-home")
 project(":feature-radiodetails").projectDir = file("feature-modules/feature-radiodetails")

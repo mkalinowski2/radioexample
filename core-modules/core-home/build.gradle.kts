@@ -1,10 +1,12 @@
 plugins {
     id("pl.fewbits.radioexample.java")
+    kotlin("plugin.serialization")
 }
 
 dependencies {
     implementation(project(":lib-network"))
     implementation(libs.koin.core)
+    implementation(libs.serializable)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.test.mockk)

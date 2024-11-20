@@ -16,6 +16,9 @@ dependencies {
     api(libs.androidx.ui.graphics)
     api(libs.androidx.ui.tooling.preview)
     api(libs.androidx.material3)
+    api(libs.coil)
+    api(libs.koin.androidx.compose)
+
 
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -11,6 +11,6 @@ class KoinCheckModuleTest {
 
     @Test
     fun checkModules() {
-        networkModule.verify(listOf(ApiCacheProvider::class, ApiBaseUrlProvider::class, Boolean::class, List::class))
+        libNetworkModule.verify(listOf(ApiCacheProvider::class, ApiBaseUrlProvider::class, Boolean::class, List::class))
     }
 }

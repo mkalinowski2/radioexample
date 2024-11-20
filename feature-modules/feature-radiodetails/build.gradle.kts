@@ -6,3 +6,9 @@ plugins {
 android {
     namespace = "pl.fewbits.radioexample.feature.radiodetails"
 }
+
+dependencies {
+    implementation(project(":android-ui"))
+    implementation(project(":android-app-navigator"))
+    implementation(project(":core-home"))
+}
