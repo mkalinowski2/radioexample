@@ -1,5 +1,7 @@
 package pl.fewbits.radioexample.core.home
 
-class GetHomeUseCase(private val network: HomeNetwork) {
+import java.util.Date
+
+class GetHomeUseCase(private val network: HomeNetwork, private val date: Date) {
     suspend fun getHome() = network.getHome()
 }

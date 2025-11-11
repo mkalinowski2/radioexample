@@ -12,6 +12,7 @@ import pl.fewbits.radioexample.lib.network.ApiOkHttpClientFactory
 import pl.fewbits.radioexample.lib.network.ApiRetrofitProvider
 import pl.fewbits.radioexample.lib.network.config.ApiBaseUrlProvider
 import pl.fewbits.radioexample.lib.network.config.ApiCacheProvider
+import java.util.Date
 import kotlin.test.assertEquals
 
 private const val baseUrl = "https://s3-us-west-1.amazonaws.com"
@@ -32,7 +33,7 @@ class HomeNetworkIT {
 
     @Test
     fun testGetHome() {
-        val network = HomeNetwork(retrofitProvider)
+        val network = HomeNetwork(retrofitProvider, Date())
 
         val homeResponse = runBlocking { network.getHome() }
         assertEquals(10, homeResponse.radioStations.size)

@@ -7,6 +7,7 @@ import org.junit.Test
 import pl.fewbits.radioexample.core.home.GetHomeUseCase
 import pl.fewbits.radioexample.core.home.HomeNetwork
 import pl.fewbits.radioexample.core.home.domain.HomeResponse
+import java.util.Date
 import kotlin.test.assertEquals
 
 class GetHomeUseCaseTest {
@@ -18,7 +19,7 @@ class GetHomeUseCaseTest {
             coEvery { getHome() } returns homeResponse
         }
 
-        val getHomeUseCase = GetHomeUseCase(homeNetwork)
+        val getHomeUseCase = GetHomeUseCase(homeNetwork, Date())
 
         assertEquals(homeResponse, runBlocking { getHomeUseCase.getHome() })
     }

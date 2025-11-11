@@ -14,6 +14,7 @@ import pl.fewbits.radioexample.lib.network.ApiRetrofitProvider
 import pl.fewbits.radioexample.lib.network.config.ApiBaseUrlProvider
 import pl.fewbits.radioexample.lib.network.config.ApiCacheProvider
 import java.net.HttpURLConnection
+import java.util.Date
 import kotlin.test.assertEquals
 
 class HomeNetworkTest {
@@ -39,7 +40,7 @@ class HomeNetworkTest {
 
     @Test
     fun testGetHome() {
-        val network = HomeNetwork(retrofitProvider)
+        val network = HomeNetwork(retrofitProvider, Date())
 
         mockWebServer.enqueue(
             MockResponse()

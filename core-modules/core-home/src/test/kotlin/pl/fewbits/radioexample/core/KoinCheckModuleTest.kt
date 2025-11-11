@@ -1,16 +1,31 @@
 package pl.fewbits.radioexample.core
 
+import io.mockk.mockk
 import org.junit.Test
-import org.koin.core.annotation.KoinExperimentalAPI
-import org.koin.test.verify.verify
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
+import org.koin.test.KoinTest
+import org.koin.test.get
+import pl.fewbits.radioexample.core.home.GetHomeUseCase
 import pl.fewbits.radioexample.core.home.coreHomeModule
 import pl.fewbits.radioexample.lib.network.ApiRetrofitProvider
 
-@OptIn(KoinExperimentalAPI::class)
-class KoinCheckModuleTest {
+class KoinCheckModuleTest : KoinTest {
 
     @Test
     fun checkModules() {
-        coreHomeModule.verify(listOf(ApiRetrofitProvider::class))
+        startKoin {
+            modules(coreHomeModule, module {
+                single { mockk<ApiRetrofitProvider>() }
+            })
+        }
+
+        val useCase = get<LoginViewModel>()
+
+        val scope = getKoin().createScope<LoginViewModel>()
+        val useCase = scope.get<LoginViewModel>()
+        val useCase2 = scope.get<GetHomeUseCase>()*/
+
+        assert(useCase != null)
     }
 }

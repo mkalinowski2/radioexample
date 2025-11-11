@@ -16,6 +16,7 @@ dependencies {
     api(libs.androidx.ui.graphics)
     api(libs.androidx.ui.tooling.preview)
     api(libs.androidx.material3)
+    api(libs.androidx.material.icons.core)
     api(libs.coil)
     api(libs.koin.androidx.compose)
 
